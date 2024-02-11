@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="todaoApplication">
+    <test name="login Test">
+        <classes>
+            <class name="NameTest"></class>
+            <class name="NameTest2"></class>
+        </classes>
+    </test>
+</suite>
