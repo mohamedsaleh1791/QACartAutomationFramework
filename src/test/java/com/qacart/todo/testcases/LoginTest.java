@@ -2,6 +2,7 @@ package com.qacart.todo.testcases;
 
 import com.qacart.todo.base.BaseTest;
 import com.qacart.todo.factory.DriverFactory;
+import com.qacart.todo.pages.LoginPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -11,10 +12,9 @@ public class LoginTest extends BaseTest {
 
     @Test
     public void shouldBeAbleLoginWithValidUserNameAndPassword(){
+        LoginPage loginPage=new LoginPage(driver);
         driver.get("https://todo.qacart.com/");
-        driver.findElement(By.cssSelector("[data-testid=\"email\"]")).sendKeys("test1791@test.com");
-        driver.findElement(By.cssSelector("[data-testid=\"password\"]")).sendKeys("Ms@123456");
-        driver.findElement(By.cssSelector("[data-testid=\"submit\"]")).click();
+        loginPage.login("test1791@test.com","MS@123456");
         boolean welcomeIsDisplayed=driver.findElement(By.cssSelector("[data-testid=\"welcome\"]")).isDisplayed();
         Assert.assertTrue(welcomeIsDisplayed);
     }
