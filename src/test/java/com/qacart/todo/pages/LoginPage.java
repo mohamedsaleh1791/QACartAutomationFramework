@@ -1,25 +1,41 @@
 package com.qacart.todo.pages;
+import com.qacart.todo.base.BasePage;
+import org.openqa.selenium.By;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
-public class LoginPage {
-    private WebDriver driver;
-   public LoginPage(WebDriver driver){
-        this.driver=driver;
-       PageFactory.initElements(driver,this);
+
+
+public class LoginPage extends BasePage {
+
+    public LoginPage(WebDriver driver) {
+        super(driver);
     }
-    @FindBy(css="[data-testid=\"email\"]")
-    private WebElement emailInput;
-    @FindBy(css="[data-testid=\"password\"]")
-    private WebElement passwordInput;
-    @FindBy(css="[data-testid=\"submit\"]")
-    private WebElement submit;
+
+
+    private By emailInput = By.cssSelector("[data-testid=\"email\"]");
+    private By passwordInput = By.cssSelector("[data-testid=\"password\"]");
+    private By submit = By.cssSelector("[data-testid=\"submit\"]");
+
+
+    public WebElement getEmail() {
+        return driver.findElement(emailInput);
+    }
+    public WebElement getPassword() {
+        return driver.findElement(passwordInput);
+    }
+    public WebElement click() {
+        return driver.findElement(submit);
+    }
+    public void loadPage(){
+        driver.get("https://todo.qacart.com/");
+    }
+
+
     public void login(String userName,String password){
-        emailInput.sendKeys(userName);
-        passwordInput.sendKeys(password);
-        submit.click();
+        getEmail().sendKeys(userName);
+        getPassword().sendKeys(password);
+        click().click();
     }
 }

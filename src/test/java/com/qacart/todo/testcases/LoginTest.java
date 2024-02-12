@@ -12,9 +12,10 @@ public class LoginTest extends BaseTest {
 
     @Test
     public void shouldBeAbleLoginWithValidUserNameAndPassword(){
+
         LoginPage loginPage=new LoginPage(driver);
-        driver.get("https://todo.qacart.com/");
-        loginPage.login("test1791@test.com","MS@123456");
+        loginPage.loadPage();
+        loginPage.login("test1791@test.com","Ms@123456");
         boolean welcomeIsDisplayed=driver.findElement(By.cssSelector("[data-testid=\"welcome\"]")).isDisplayed();
         Assert.assertTrue(welcomeIsDisplayed);
     }
