@@ -1,29 +1,23 @@
 package com.qacart.todo.testcases;
-
 import com.qacart.todo.base.BaseTest;
-import com.qacart.todo.factory.DriverFactory;
+import com.qacart.todo.pages.LoginPage;
+import com.qacart.todo.pages.TodoPage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import java.time.Duration;
-
 public class TodoTest extends BaseTest {
 
     @Test
     public void shouldBeAbleToAddNewTodo(){
 
-
-        driver.get("https://todo.qacart.com/");
-        driver.findElement(By.cssSelector("[data-testid=\"email\"]")).sendKeys("test1791@test.com");
-        driver.findElement(By.cssSelector("[data-testid=\"password\"]")).sendKeys("Ms@123456");
-        driver.findElement(By.cssSelector("[data-testid=\"submit\"]")).click();
-        driver.findElement(By.cssSelector("[data-testid=\"add\"]")).click();
-        driver.findElement(By.cssSelector("[data-testid=\"new-todo\"]")).sendKeys("Learn Java");
-        driver.findElement(By.cssSelector("[data-testid=\"submit-newTask\"]")).click();
-        String todoItemTXT=driver.findElement(By.cssSelector("[data-testid=\"todo-item\"]")).getText();
+        LoginPage loginPage=new LoginPage(driver);
+        loginPage.loadPage();
+        loginPage.login("test1791@test.com","Ms@123456");
+        TodoPage todoPage=new TodoPage(driver);
+        todoPage.clickAddButton();
+        todoPage.dataOfNewTodo("Learn Java");
+        todoPage.cliAddTodoButton();
+        String todoItemTXT=todoPage.getTodoItemName();
         Assert.assertEquals(todoItemTXT,"Learn Java");
 
     }
